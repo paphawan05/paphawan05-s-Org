@@ -1,0 +1,6 @@
+{
+  "name": "Sandwich Box POS",
+  "description": "ระบบขายหน้าร้าน (POS) สำหรับร้าน Sandwich Box จัดการสินค้า สมาชิก งานขาย รายงาน และกะการทำงาน เชื่อมต่อ Firebase และเข้าสู่ระบบด้วย Google",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

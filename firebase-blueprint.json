@@ -1,0 +1,143 @@
+{
+  "entities": {
+    "Product": {
+      "title": "Product",
+      "description": "A sandwich product in the inventory",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "barcode": { "type": "string" },
+        "name": { "type": "string" },
+        "category": { "type": "string" },
+        "cost": { "type": "number" },
+        "retailPrice": { "type": "number" },
+        "wholesalePrice": { "type": "number" },
+        "wholesaleMinQty": { "type": "number" },
+        "stock": { "type": "number" },
+        "minStock": { "type": "number" },
+        "imageUrl": { "type": "string" }
+      },
+      "required": ["id", "barcode", "name", "category", "cost", "retailPrice", "wholesalePrice", "wholesaleMinQty", "stock", "minStock"]
+    },
+    "Member": {
+      "title": "Member",
+      "description": "A registered member customer",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "phone": { "type": "string" },
+        "email": { "type": "string" },
+        "points": { "type": "number" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["id", "name", "phone", "points", "createdAt"]
+    },
+    "Transaction": {
+      "title": "Transaction",
+      "description": "A POS checkout sales transaction",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "invoiceNo": { "type": "string" },
+        "subtotal": { "type": "number" },
+        "discount": { "type": "number" },
+        "pointsUsed": { "type": "number" },
+        "pointsDiscount": { "type": "number" },
+        "total": { "type": "number" },
+        "paymentMethod": { "type": "string", "enum": ["cash", "promptpay"] },
+        "cashReceived": { "type": "number" },
+        "change": { "type": "number" },
+        "memberId": { "type": "string" },
+        "memberName": { "type": "string" },
+        "pointsEarned": { "type": "number" },
+        "sellerId": { "type": "string" },
+        "sellerName": { "type": "string" },
+        "shiftId": { "type": "string" },
+        "timestamp": { "type": "string" }
+      },
+      "required": ["id", "invoiceNo", "subtotal", "discount", "pointsUsed", "pointsDiscount", "total", "paymentMethod", "cashReceived", "change", "pointsEarned", "sellerId", "sellerName", "timestamp"]
+    },
+    "Shift": {
+      "title": "Shift",
+      "description": "A work register shift for an employee",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "employeeId": { "type": "string" },
+        "employeeName": { "type": "string" },
+        "startTime": { "type": "string" },
+        "endTime": { "type": "string" },
+        "openingCash": { "type": "number" },
+        "closingCash": { "type": "number" },
+        "expectedCash": { "type": "number" },
+        "difference": { "type": "number" },
+        "salesTotal": { "type": "number" },
+        "status": { "type": "string", "enum": ["open", "closed"] }
+      },
+      "required": ["id", "employeeId", "employeeName", "startTime", "openingCash", "salesTotal", "status"]
+    },
+    "Employee": {
+      "title": "Employee",
+      "description": "A registered staff or manager with system privileges",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "email": { "type": "string" },
+        "role": { "type": "string", "enum": ["admin", "staff"] },
+        "posOnly": { "type": "boolean" },
+        "viewReports": { "type": "boolean" },
+        "manageProducts": { "type": "boolean" },
+        "manageSettings": { "type": "boolean" }
+      },
+      "required": ["id", "name", "email", "role", "posOnly", "viewReports", "manageProducts", "manageSettings"]
+    },
+    "Promotion": {
+      "title": "Promotion",
+      "description": "A marketing discount campaign",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "type": { "type": "string", "enum": ["buy_x_get_y", "discount_percentage", "freebie_threshold"] },
+        "buyQty": { "type": "number" },
+        "freeQty": { "type": "number" },
+        "discountPercent": { "type": "number" },
+        "thresholdAmount": { "type": "number" },
+        "freebieName": { "type": "string" },
+        "applicableProductIds": { "type": "array" },
+        "startDate": { "type": "string" },
+        "endDate": { "type": "string" },
+        "active": { "type": "boolean" }
+      },
+      "required": ["id", "name", "type", "startDate", "endDate", "active"]
+    }
+  },
+  "firestore": {
+    "products/{productId}": {
+      "schema": "Product",
+      "description": "Collections of sandwich products"
+    },
+    "members/{memberId}": {
+      "schema": "Member",
+      "description": "Collections of loyalty members"
+    },
+    "transactions/{transactionId}": {
+      "schema": "Transaction",
+      "description": "Collections of sales transactions"
+    },
+    "shifts/{shiftId}": {
+      "schema": "Shift",
+      "description": "Collections of work shifts"
+    },
+    "employees/{employeeId}": {
+      "schema": "Employee",
+      "description": "Collections of authorized employees"
+    },
+    "promotions/{promotionId}": {
+      "schema": "Promotion",
+      "description": "Collections of promotional campaigns"
+    }
+  }
+}
